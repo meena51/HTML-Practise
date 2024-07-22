@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreetUser</title>
+    <style>
+        #puppy-image {
+            display: inline-block;
+            float: left;
+        }
+
+        #donutform {
+            display: flex;
+            flex-direction: column;
+            float: right;
+        }
+
+        input {
+            max-width: 300px;
+        }
+
+        #btn {
+            max-width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">Welcome!</h1>
+    <div class="container" onclick="puppyClicked()">
+        <img src="./images/puppy.jpg" alt="puppy" height="200" width="200">
+        <form id="registrationForm">
+            <label for="Name">Name:</label>
+            <input type="text" id="Name" name="Name" required>
+            <label for="cakeDonuts">Number of Cake Donuts</label>
+            <input type="number" id="cakeDonuts" name="cakeDonuts" required>
+
+            <label for="bakedDonuts">Number od Baked Donuts</label>
+            <input type="number" id="bakedDonuts" name="bakedDonuts" required>
+
+            <label for="minutes">Number of minutes</label>
+            <input type="number" id="minutes" name="minutes">
+
+            <label for="subtotal">Subtotal</label>
+            <input type="number" id="subtotal" name="subtotal">
+
+            <label for="tax">Tax</label>
+            <input type="number" id="tax" name="tax">
+
+            <label for="total">Total</label>
+            <input type="number" id="total" name="total">
+
+            <button type="button" onclick="calculateTotal()">Submit</button>
+        </form>
+    </div>
+    <div id="message"></div>
+    <div id="sadface">
+        <img src="./images/sadface.png" alt="sadface" height="50px" width="50px">
+    </div>
+    <div id="finalmessage"></div>
+    <script>
+        let userName = null;
+        let lastClickTime = null;
+
+        function greetUser() {
+            userName = prompt('Your Good Name Please!');
+            if (userName) {
+                document.getElementById('message').innerHTML = `Hi! ${userName}. Nice to meet you 😊`;
+                document.getElementById('message').style.display = 'block';
+                document.getElementById('sadface').style.display = 'none';
+                lastClickTime = Date.now();
+            }
+        }
+
+        function update() {
+            const currTime = Date.now();
+            const timeDifference = (currTime - lastClickTime) / (1000 * 60);
+            if (timeDifference > 5) {
+                document.getElementById('sadface').style.display = 'block';
+                document.getElementById('message').style.display = 'none';
+            }
+        }
+
+        function puppyClicked() {
+            if (!userName) {
+                greetUser();
+            } else {
+                document.getElementById('message').innerText = `Welcome back, ${userName}! 😊.`;
+                document.getElementById('message').style.display = 'block';
+                document.getElementById('sadface').style.display = 'none';
+                lastClickTime = Date.now();
+                if (lastClickTime) {
+                    document.getElementById('registrationForm').style.display = 'block'; // Change to block
+                }
+            }
+        }
+
+        function calculateTotal() {
+            const userName = document.getElementById('Name').value;
+            const cakeDonuts = parseInt(document.getElementById('cakeDonuts').value, 10) || 0;
+            const bakedDonuts = parseInt(document.getElementById('bakedDonuts').value, 10) || 0;
+            const minutes = parseInt(document.getElementById('minutes').value, 10) || 0;
+
+            
+            const cakeDonutPrice = 1; 
+            const bakedDonutPrice = 1.5; 
+            const minuteRate = 0.2; 
+            const taxRate = 0.1; 
+
+            const subtotal = cakeDonuts * cakeDonutPrice + bakedDonuts * bakedDonutPrice + minutes * minuteRate;
+            const tax = subtotal * taxRate;
+            const total = subtotal + tax;
+
+            document.getElementById('subtotal').value = subtotal.toFixed(2);
+            document.getElementById('tax').value = tax.toFixed(2);
+            document.getElementById('total').value = total.toFixed(2);
+
+            document.getElementById('finalmessage').innerHTML = `Thank You for placing the order, ${userName}! Your Total Bill is $${total.toFixed(2)}.`;
+            document.getElementById('message') = 'none';
+            document.getElementById('sadface').style.display = 'none';
+        }
+
+        setInterval(update, 1000);
+    </script>
+</body>
+</html>

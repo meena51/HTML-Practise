@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="message"></div>
+    <div id="button">
+        <button onclick="greetUser()">Greet</button>
+    </div>
+    <script>
+        let userName = prompt("Enter your name")
+        function greetUser(){
+            if(userName){
+            document.getElementById("message").innerHTML = `Hi ${userName}, Welcome!`;
+            document.getElementById("button").style.display = 'none';
+            lastClicktime = Date.now();
+        }
+        }
+    </script>
+</body>
+</html>

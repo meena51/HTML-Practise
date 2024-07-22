@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="Toggle()">Toggle</button>
+    <script>
+        let flag=false;
+        function Toggle(){
+            if(flag===false){
+                document.getElementsByTagName("body")[0].style.backgroundColor = "white";
+                flag=true;
+            }
+            else{
+                document.getElementsByTagName("body")[0].style.backgroundColor = "black";
+                flag=false;
+            }
+        }
+    </script>
+</body>
+</html>

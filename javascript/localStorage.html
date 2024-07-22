@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="setLocal()">Local Storage</button>
+    <button onclick="setStorage()">Session Storage</button>
+    <script>
+        function setLocal(){
+            const user = {name:"meena"}
+            localStorage.setItem("user", JSON.stringify(user));
+        }
+        function setStorage(){
+            const user2 = {name:"Karthik"}
+            sessionStorage.setItem("user2",JSON.stringify(user2))
+        }
+    </script>
+</body>
+</html>
